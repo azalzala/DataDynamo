@@ -1,0 +1,203 @@
+﻿TEAM CIAA
+Group 3
+Ikram ZAKARIA, Chris de Wardt, Aya Zalzala
+
+
+I Notes:
+We started the exercise by first understanding what the data was about and how it was split. Then we tried to organize ourselves to implement it in DataBeaver. 
+Below are a few comments on what we found:
+* Some columns were duplicated (gender)
+* Column names were a bit confusing and not adapted to the database 
+* Column ID had duplicates, we were given another document afterwards
+
+
+The changes we made:
+* Adapted data column name: underscores for spaces/dashes, removed multiple line headers
+Create Statement:
+I Create table
+create table student.team_ciaa(
+        ID int PRIMARY KEY,
+        Purchase_date varchar(30),
+        Date varchar(30),
+        Time varchar(30),
+        Quarter varchar(30),
+        Qtr int,
+        Year int,
+        month int,
+        Day_of_month int,
+        Special_day int,
+        Online_Sale_Offers int,
+        day_of_week int,
+        Weekend int,
+        Morning int,
+        Afternoon int,
+        Evening int,
+        Night int,
+        Gender int,
+        Customer_ID varchar(100),
+        Gender_F_M varchar(1),
+        Product_Name varchar(300),
+        Item_Status varchar(100),
+        Quantity int,
+        Currency varchar(20),
+        Item_Price FLOAT,
+        Shipping_Price FLOAT,
+        Ship_City varchar(100),
+        Ship_State varchar(100),
+        Ship_Postal_Code varchar(100),
+        Category varchar(100),
+        Total_amount FLOAT,
+        Author varchar(100),
+        publication varchar(100),
+        Profit_Percentage FLOAT,
+        Profit_INR FLOAT,
+        Cost_Price FLOAT
+        );
+II Code ID and SQL queries
+
+
+ – DD–MM–QC-1
+SELECT
+        count(*)
+FROM
+        student.team_ciaa
+
+
+
+
+– DD-MM-QC-2
+SELECT
+        count(DISTINCT id)
+FROM
+        student.team_ciaa
+
+
+– DD-MM-QC-3
+SELECT
+        COUNT(*)
+FROM information_schema.columns
+WHERE table_schema = 'student' AND table_name = 'team_ciaa';
+
+
+– DD-MM-QC-4
+SELECT ipping_price) +
+    SUM(total_amount) +
+    SUM(profit_percentage) +
+    SUM(profit_inr) +
+    SUM(cost_price) AS total_sum_of_columns
+FROM student.team_ciaa;
+
+
+
+
+– DD-MM-QC-5
+SELECT
+   SUM(online_sale_offers +
+       quantity +
+       item_price +
+       shipping_price +
+       total_amount +
+       profit_percentage +
+       profit_inr +
+       cost_price) AS total_sum_of_rows
+FROM student.team_ciaa;
+
+
+
+
+
+
+– DD-MM-QC-6
+SELECT
+        id,
+        purchase_date,
+        date
+FROM 
+        student.team_ciaa
+WHERE
+        id=3265 
+        OR id=303
+        OR id=1701
+        OR id=1864
+        OR id=2026;
+
+
+– DD-MM-QC-7
+SELECT
+        *
+FROM 
+        student.team_ciaa
+WHERE
+        id=529 
+        OR id=1820
+        OR id=657
+        OR id=456
+        OR id=1744;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+– DD-MM-QC-8
+
+
+SELECT 
+    COUNT(NULLIF(Purchase_date IS NULL, false)) AS null_count_Purchase_date,
+    COUNT(NULLIF(Date IS NULL, false)) AS null_count_Date,
+    COUNT(NULLIF(Time IS NULL, false)) AS null_count_Time,
+    COUNT(NULLIF(Quarter IS NULL, false)) AS null_count_Quarter,
+    COUNT(NULLIF(Qtr IS NULL, false)) AS null_count_Qtr,
+    COUNT(NULLIF(Year IS NULL, false)) AS null_count_Year,
+    COUNT(NULLIF(month IS NULL, false)) AS null_count_month,
+    COUNT(NULLIF(Day_of_month IS NULL, false)) AS null_count_Day_of_month,
+    COUNT(NULLIF(Special_day IS NULL, false)) AS null_count_Special_day,
+    COUNT(NULLIF(Online_Sale_Offers IS NULL, false)) AS null_count_Online_Sale_Offers,
+    COUNT(NULLIF(day_of_week IS NULL, false)) AS null_count_day_of_week,
+    COUNT(NULLIF(Weekend IS NULL, false)) AS null_count_Weekend,
+    COUNT(NULLIF(Morning IS NULL, false)) AS null_count_Morning,
+    COUNT(NULLIF(Afternoon IS NULL, false)) AS null_count_Afternoon,
+    COUNT(NULLIF(Evening IS NULL, false)) AS null_count_Evening,
+    COUNT(NULLIF(Night IS NULL, false)) AS null_count_Night,
+    COUNT(NULLIF(Gender IS NULL, false)) AS null_count_Gender,
+    COUNT(NULLIF(Customer_ID IS NULL, false)) AS null_count_Customer_ID
+FROM student.team_ciaa;
+
+
+
+
+
+
+
+
+
+
+
+
+– DD-MM-QC-9
+
+
+SELECT 
+    SUM(ID) AS sum_ID, MIN(ID) AS min_ID, MAX(ID) AS max_ID,
+    SUM(Online_Sale_Offers) AS sum_Online_Sale_Offers, MIN(Online_Sale_Offers) AS min_Online_Sale_Offers, MAX(Online_Sale_Offers) AS max_Online_Sale_Offers,
+    SUM(Qtr) AS sum_Qtr, MIN(Qtr) AS min_Qtr, MAX(Qtr) AS max_Qtr,
+    SUM(Year) AS sum_Year, MIN(Year) AS min_Year, MAX(Year) AS max_Year,
+    SUM(month) AS sum_month, MIN(month) AS min_month, MAX(month) AS max_month,
+    SUM(Day_of_month) AS sum_Day_of_month, MIN(Day_of_month) AS min_Day_of_month, MAX(Day_of_month) AS max_Day_of_month,
+    SUM(Special_day) AS sum_Special_day, MIN(Special_day) AS min_Special_day, MAX(Special_day) AS max_Special_day,
+    SUM(day_of_week) AS sum_day_of_week, MIN(day_of_week) AS min_day_of_week, MAX(day_of_week) AS max_day_of_week,
+    SUM(Weekend) AS sum_Weekend, MIN(Weekend) AS min_Weekend, MAX(Weekend) AS max_Weekend,
+    SUM(Morning) AS sum_Morning, MIN(Morning) AS min_Morning, MAX(Morning) AS max_Morning,
+    SUM(Afternoon) AS sum_Afternoon, MIN(Afternoon) AS min_Afternoon, MAX(Afternoon) AS max_Afternoon,
+    SUM(Evening) AS sum_Evening, MIN(Evening) AS min_Evening, MAX(Evening) AS max_Evening,
+    SUM(Night) AS sum_Night, MIN(Night) AS min_Night, MAX(Night) AS max_Night,
+    SUM(Gender) AS sum_Gender, MIN(Gender) AS min_Gender, MAX(Gender) AS max_Gender
+FROM student.team_ciaa;
